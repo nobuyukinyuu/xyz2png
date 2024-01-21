@@ -13,9 +13,10 @@ input_path = sys.argv[1]
 output_path = sys.argv[2]
 
 with open(input_path, 'rb') as input_fh:
-	magic = input_fh.read(4)
+	magic = input_fh.read(4).decode()
 	if magic != 'XYZ1':
-		print >>sys.stderr, 'Unsupported file type: ' + magic
+		# print >>sys.stderr, 'Unsupported file type: ' + magic
+		print ('Unsupported file type: ' + str(magic), sys.stderr)
 		sys.exit(1)
 	width, height = struct.unpack('=HH', input_fh.read(4))
 	rest = input_fh.read()
